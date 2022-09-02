@@ -1,0 +1,8 @@
+{
+    "editor.rulers": [
+        50,
+        72,
+        80,
+    ],
+    "files.autoSave": "onFocusChange"
+}
