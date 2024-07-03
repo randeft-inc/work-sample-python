@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import FilesystemDumper from './FilesystemDumper';
+import FilesystemDumper from './FilesystemDumper.js';
 
 const instance = new FilesystemDumper();
 

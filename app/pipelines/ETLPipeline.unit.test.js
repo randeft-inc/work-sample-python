@@ -1,5 +1,5 @@
 import jest from 'jest-mock';
-import ETLPipeline from './ETLPipeline';
+import ETLPipeline from './ETLPipeline.js';
 
 const extract = jest.fn(() => 'extracted');
 const transform = jest.fn(() => 'transformed');

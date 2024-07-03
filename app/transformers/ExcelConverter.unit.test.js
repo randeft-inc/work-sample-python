@@ -1,5 +1,5 @@
 import fs from 'fs';
-import ExcelConverter from './ExcelConverter';
+import ExcelConverter from './ExcelConverter.js';
 
 const instance = new ExcelConverter({});
 

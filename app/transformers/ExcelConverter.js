@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx/xlsx';
+import * as XLSX from 'xlsx/xlsx.js';
 
 function ExcelConverter() {
   this.transform = function transform(data) {

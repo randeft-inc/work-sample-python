@@ -1,4 +1,4 @@
-import DataExtractor from './DataExtractor';
+import DataExtractor from './DataExtractor.js';
 
 const instance = new DataExtractor();
 
