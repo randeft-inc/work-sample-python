@@ -13,7 +13,10 @@
             ],
             "cwd": "${workspaceFolder}/",
             "runtimeExecutable": "npm",
-            "runtimeArgs": ["run-script", "start"]
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ]
         },
         {
             "type": "node",
@@ -24,9 +27,11 @@
             ],
             "cwd": "${workspaceFolder}/",
             "runtimeExecutable": "npx",
-            "runtimeArgs": ["jest"],
+            "runtimeArgs": [
+                "jest"
+            ],
             "env": {
-              "NODE_OPTIONS": "--experimental-vm-modules"
+                "NODE_OPTIONS": "--experimental-vm-modules"
             }
         }
     ]
