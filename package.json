@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node --experimental-modules --es-module-specifier-resolution=node app/app.js",
     "lint": "eslint app/**/*.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest"
   },
   "type": "module",
   "devDependencies": {
