@@ -24,28 +24,18 @@ The development environment is contained in a Docker Dev Environment, so the onl
 
 - [Git](https://git-scm.com/)
 - [Docker Desktop](https://docs.docker.com/desktop/release-notes/) (latest version)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Visual Studio Code](https://code.visualstudio.com/) (latest version)
+- The Visual Studio Code [Remote Development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
 The setup will work on both Intel (amd64) and Apple Silicon (arm64) processors.
 
-### Create the Dev Environment
+When opening the project in VSCode, the Dev Container extension should
+prompt you to "**Reopen in Container**". Select that option to create
+a Dev Container. This will take a few minutes the first time, and will
+only take a few seconds the following times.
 
-Once you have the prerequisites installed, create a new Docker Dev Environment using this repo's cloning URL.
-
-If you a unsure how to proceed, please follow the [Create a Dev Environment From a Git Repository](https://docs.docker.com/desktop/dev-environments/create-dev-env/#create-a-dev-environment-from-a-git-repository) instructions. Don't forget to replace the repo URL in the instructions with the URL for this repo.
-
-Once the Dev Environment is started, click "Open in VSCode". A "Starting Dev Container" message will appear at the bottom right. Wait a few seconds until it dissapears, and you should be ready to start.
-
-Open a terminal in VSCode. This will open a shell inside the Dev Environment container, and you should see a prompt like the following:
-
-    node ➜ /com.docker.devenvironments.code (main) $
-
-All following `npm` and other commands are to be run inside that Dev Environment shell.
-
-#### Note about the Dev Environment lifecycle
-
-Local changes you make in VSCode are persisted in a Docker volume. It is therefore safe to stop and restart the Dev Environment container: your changes, uncommitted code included, will still be there. But do not **delete** the dev environment: your changes would be lost.
+All following command are to be run in the VSCode integrated terminal,
+after VSCode has been "reopened in Container".
 
 ### Anonymity Setup
 
@@ -57,7 +47,7 @@ This will set the Git name to a random string, and Git email to "<>", making all
 
 ### Dependency management
 
-To install the dependencies, execute the following inside the repo's top-level folder:
+Defaults dependencies are automatically installed when the Dev Container is created. If you need to add more dependencies, you can do so by editing the `package.json` file, and then running:
 
     npm install
 
