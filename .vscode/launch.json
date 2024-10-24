@@ -5,35 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "name": "Python: Run App",
+            "type": "debugpy",
             "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "cwd": "${workspaceFolder}/",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "run-script",
-                "start"
-            ]
+            "program": "${workspaceFolder}/app/app.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         },
         {
-            "type": "node",
+            "name": "Python: Run Tests",
+            "type": "debugpy",
             "request": "launch",
-            "name": "Launch Tests",
-            "skipFiles": [
-                "<node_internals>/**"
+            "module": "unittest",
+            "args": [
+                "discover",
+                "-s",
+                "./app",
+                "-p",
+                "*_test.py"
             ],
-            "cwd": "${workspaceFolder}/",
-            "runtimeExecutable": "npx",
-            "runtimeArgs": [
-                "jest"
-            ],
-            "env": {
-                "NODE_NO_WARNINGS": "1",
-                "NODE_OPTIONS": "--experimental-vm-modules"
-            }
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }

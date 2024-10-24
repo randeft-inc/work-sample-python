@@ -1,6 +1,6 @@
 # Randeft work sample
 
-This work sample is based on a simplified reporting system that extracts data from a source, analyses it and writes the results on the local drive. It is a pure Javascript code sample, no other framework knowledge required. Jest is used for tests, but prior knowledge of Jest is not a requirement: it should be straightforward to extend the existing tests.
+This work sample is based on a simplified reporting system that extracts data from a source, analyses it and writes the results on the local drive. It is a pure Python code sample, no other framework knowledge required. Python's unittest is used for tests, but prior knowledge is not a requirement: it should be straightforward to extend the existing tests.
 
 ## The Assignment
 
@@ -20,7 +20,7 @@ After you submit part 1, MSSM will have some new requirements. Change your code 
 
 ### Prerequisites
 
-The development environment is contained in a Docker Dev Environment, so the only things needed on your machine are:
+The development environment is contained in a Docker Dev Container, so the only things needed on your machine are:
 
 - [Git](https://git-scm.com/)
 - [Docker Desktop](https://docs.docker.com/desktop/release-notes/) (latest version)
@@ -47,15 +47,15 @@ This will set the Git name to a random string, and Git email to "<>", making all
 
 ### Dependency management
 
-Defaults dependencies are automatically installed when the Dev Container is created. If you need to add more dependencies, you can do so by editing the `package.json` file, and then running:
+Defaults dependencies are automatically installed when the Dev Container is created. If you need to add more dependencies, you can do so by editing the `requirements.txt` file, and then running:
 
-    npm install
+    pip install -r requirements.txt
 
 ### Unit tests
 
 Verify that the unit tests run without errors with:
 
-    npm test unit
+    make test
 
 Note: for this work sample, we only use unit tests, no integration tests.
 
@@ -63,7 +63,7 @@ Note: for this work sample, we only use unit tests, no integration tests.
 
 To run the reporting system:
 
-    npm start
+    make run
 
 This will generate files in the `output` folder, from files in the `raw_data` folder.
 
