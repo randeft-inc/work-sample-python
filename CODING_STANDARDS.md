@@ -1,12 +1,10 @@
 # Style Guide
 
-This project follows the
-[Airbnb JavaScript Style Guide](https://airbnb.io/javascript/), but there is no
-need to know the whole thing: the editor's linter will help you.
-
-There is one modification:
-
-- Maximum line length is 80 characters.
+This project follows the [The _Black_ code
+style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html),
+a strict subset of [PEP 8](https://peps.python.org/pep-0008/). But there is
+no need to know the whole thing: the editor's linter will help you and auto-format
+the code when you save.
 
 
 # Naming Rules
@@ -59,8 +57,8 @@ Exemple of a **bad** commit history:
     | * Fix typo
     | * Refactor
     | * WIP Implement upload
-    | * Commit forgotten package-lock.json
-    | * Add node-ftp package
+    | * Commit forgotten requirements.txt
+    | * Add pyftpdlib package
     |/
     *
 
@@ -68,7 +66,7 @@ Exemple of a **good** commit history:
 
     | * Add FTP uploader to processing pipeline
     | * Implement FTP uploader
-    | * Add node-ftp package
+    | * Add pyftpdlib package
     | * Refactor to allow the use of multiple uploaders
     |/
     *
