@@ -1,17 +1,19 @@
-from pipelines.ETLPipeline import ETLPipeline
-from extractors.DataExtractor import DataExtractor
-from transformers.ExcelConverter import ExcelConverter
-from loaders.FilesystemDumper import FilesystemDumper
+"""Main entry point for the ETL pipeline application.
 
+This module initializes and runs the ETL (Extract, Transform, Load) pipeline
+with the configured components for data extraction, transformation, and loading.
+"""
+
+from .pipelines.ETLPipeline import ETLPipeline
+from .extractors.DataExtractor import DataExtractor
+from .transformers.ExcelConverter import ExcelConverter
+from .loaders.FilesystemDumper import FilesystemDumper
 
 if __name__ == "__main__":
-
-    extractor = DataExtractor()
-    transformer = ExcelConverter()
-    loader = FilesystemDumper()
-
     pipeline = ETLPipeline(
-        extractor=extractor, transformer=transformer, loader=loader
+        extractor=DataExtractor(),
+        transformer=ExcelConverter(),
+        loader=FilesystemDumper(),
     )
 
     pipeline.perform()

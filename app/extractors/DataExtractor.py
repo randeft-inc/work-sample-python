@@ -1,22 +1,23 @@
-import os
+from pathlib import Path
+from typing import List
+from ..data_types import ExtractedData
 
-INPUT_FOLDER = "./raw_data/"
+INPUT_FOLDER = Path("./raw_data/")
 
 
 class DataExtractor:
-    def extract(self):
-        filenames = sorted(os.listdir(INPUT_FOLDER))
+    """Extracts data from raw data files.
+
+    For this sample, the extractor reads files from the local disk.
+    In practice, it would get data from an external system.
+    """
+
+    def extract(self) -> List[ExtractedData]:
+        filenames = sorted(INPUT_FOLDER.iterdir())
         return [
             {
-                "original": filename,
-                "basename": os.path.splitext(filename)[0],
-                "content": self._read_file(
-                    os.path.join(INPUT_FOLDER, filename)
-                ),
+                "basename": filename.stem,
+                "content": filename.read_text(encoding="utf-8"),
             }
             for filename in filenames
         ]
-
-    def _read_file(self, file_path):
-        with open(file_path, "r") as file:
-            return file.read()

@@ -47,11 +47,11 @@ open: check-not-dev-container
 
 test: ## Run the tests (inside the Dev Container)
 test: in-dev-container
-	@python -m unittest discover -p '*_test.py' app
+	@python -m unittest discover -p '*_test.py'
 
 run: ## Run the application (inside the Dev Container)
 run: in-dev-container
-	@python app/app.py
+	@python -m app.app
 	@echo '🎉 The application ran successfully.'
 
 in-dev-container:

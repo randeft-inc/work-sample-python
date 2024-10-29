@@ -1,60 +1,57 @@
-import openpyxl
-import csv
-import io
+from openpyxl import Workbook
+from io import BytesIO, StringIO
+from csv import reader
+from typing import List, Dict, Tuple, Union
+from ..data_types import ExtractedData, TransformedData
 
 
 class ExcelConverter:
-    def transform(self, data):
+    """Transforms input data into Excel (XLSX) format."""
+
+    def transform(self, data: List[ExtractedData]) -> List[TransformedData]:
         return [
             {
-                "original": item["original"],
                 "filename": f"{item['basename']}.xlsx",
-                "content": item["content"],
-                "xlsxContent": self.convert_to_excel_like(
-                    item["content"], "xlsx"
-                ),
-                "csvContent": self.convert_to_excel_like(
-                    item["content"], "csv"
-                ),
+                "content": self._convert_to_excel(item["content"]),
             }
             for item in data
         ]
 
-    def convert_to_excel_like(self, content, book_type):
-        separator, preprocessed_content = self.preprocess_content(content)
+    def _convert_to_excel(self, content: str) -> bytes:
+        separator, preprocessed_content = self._preprocess_content(content)
+        workbook = self._xlsx_read(preprocessed_content, separator)
+        return self._xlsx_write(workbook)
 
-        if book_type == "xlsx":
-            wb = openpyxl.Workbook()
-            ws = wb.active
-            for row in csv.reader(
-                io.StringIO(preprocessed_content), delimiter=separator
-            ):
-                ws.append(row)
+    def _xlsx_read(self, preprocessed_content: str, separator: str) -> Workbook:
+        workbook = Workbook()
+        for row in reader(StringIO(preprocessed_content), delimiter=separator):
+            workbook.active.append(row)
+        return workbook
 
-            output = io.BytesIO()
-            wb.save(output)
-            return output.getvalue()
-        elif book_type == "csv":
-            return preprocessed_content.encode("utf-8")
+    def _xlsx_write(self, workbook: Workbook) -> bytes:
+        buffer = BytesIO()
+        workbook.save(buffer)
+        return buffer.getvalue()
 
-    def preprocess_content(self, content):
-        options = self.options(content)
-        preprocessed_content = "\n".join(
-            content.split("\n")[options["lines_to_skip"] :]
+    def _preprocess_content(self, content: str) -> Tuple[str, str]:
+        options = self._options(content)
+        separator = options["separator"]
+        processed = "\n".join(content.split("\n")[options["lines_to_skip"] :])
+        if options["must_merge_separators"]:
+            processed = self._merge_separators(processed, separator)
+        return separator, processed
+
+    def _merge_separators(self, content: str, separator: str) -> str:
+        return content.replace(
+            f"{separator}{separator}",
+            separator,
+        ).replace(
+            f"\n{separator}",
+            "\n",
         )
 
-        if options["must_merge_separators"]:
-            preprocessed_content = preprocessed_content.replace(
-                f"{options['separator']}{options['separator']}",
-                options["separator"],
-            )
-            preprocessed_content = preprocessed_content.replace(
-                f"\n{options['separator']}", "\n"
-            )
-
-        return options["separator"], preprocessed_content
-
-    def options(self, content):
+    def _options(self, content: str) -> Dict[str, Union[str, bool, int]]:
+        # Simplistic heuristic to classify two types of files
         if "[Data]" in content:
             return {
                 "separator": ",",
